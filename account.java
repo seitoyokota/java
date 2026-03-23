@@ -1,18 +1,18 @@
 public class Account {
-    private static String storedUsername = "admin";
-    private static String storedPassword = "password";
-    public static void createAccount(String username, String password) {
+    private String storedUsername;
+    private String storedPassword;
+    public Account(String username, String password) {
         storedUsername = username;
         storedPassword = password;
         System.out.println("Account created successfully.");
     }
-    public static boolean loginAccount(String username, String password) {
-        if(storedUsername.equals(username) && storedPassword.equals(password)) {
-            System.out.println("Login successful.");
-            return true;
-        } else {
-            System.out.println("Invalid username or password.");
-            return false;
-        }
+    public String getUsername() {
+        return storedUsername;
+    }
+    public String getPassword() {
+        return storedPassword;
+    }
+    public String toString() {
+        return "Username: " + storedUsername + ", Password: " + storedPassword;
     }
 }
