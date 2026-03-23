@@ -1,22 +1,14 @@
 import java.util.Scanner;
 public class login {
-    private static String storedUsername = "admin";
-    private static String storedPassword = "password";
-    public static void createAccount(String username, String password) {
-        storedUsername = username;
-        storedPassword = password;
-        System.out.println("Account created successfully.");
+    ArrayList<Account> accounts = new ArrayList<>();
+    public void add(Account account) {
+        accounts.add(account);
     }
-    public static void loginAccount(String username, String password) {
-        if (username.equals(storedUsername) && password.equals(storedPassword)) {
-            System.out.println("Login successful!");
-        } else {
-            System.out.println("Invalid username or password.");
-        }
-    }
+
     public static void main(String[] args) {
+        ArrayList<Account> accounts = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.print("1. create account\n2. login\n3. Exit\nEnter your choice: ");
+        System.out.print("1. create account\n2. login\n3. exit\nEnter your choice: ");
         int choice = scanner.nextInt();
         while(choice != 3) {
             switch (choice) {
@@ -25,19 +17,23 @@ public class login {
                     String user = scanner.next();
                     System.out.print("Enter password: ");
                     String pass = scanner.next();
-                    createAccount(user, pass);
+                    accounts.add(new Account(user, pass));
                     break;
                 case 2:
                     System.out.print("Enter username: ");
                     user = scanner.next();
                     System.out.print("Enter password: ");
                     pass = scanner.next();
-                    loginAccount(user, pass);
+                    for(Account account : accounts) {
+                        if(account.loginAccount(user, pass)) {
+                            break;
+                        }
+                    }
                     break;
                 default:
                     System.out.println("Invalid choice.");
             }
-            System.out.print("1. create account\n2. login\n3. Exit\nEnter your choice: ");
+            System.out.print("1. create account\n2. login\n3. exit\nEnter your choice: ");
             choice = scanner.nextInt();
         }
     }
